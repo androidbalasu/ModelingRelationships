@@ -14,7 +14,10 @@ const Author = mongoose.model('Author', authorSchema);
 
 const Course = mongoose.model('Course', new mongoose.Schema({
   name: String,
-  author: authorSchema
+  author: {
+    type: authorSchema,
+    required: true
+  }
 }));
 
 async function createCourse(name, author) {
@@ -34,8 +37,8 @@ async function listCourses() {
  
 async function updateAuthor(courseid){
   const course = await Course.update({_id: courseid}, {
-    $unset: {
-      'author': ''
+    $set: {
+      'author': 'adsfasdfsadfa'
     }
   })
 }
